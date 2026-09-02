@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2a1530"/>
+      <stop offset="1" stop-color="#1a1025"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="400" fill="url(#g)"/>
+  <circle cx="620" cy="90" r="120" fill="#f0732d" opacity="0.22"/>
+  <circle cx="180" cy="320" r="130" fill="#e45c10" opacity="0.14"/>
+  <text x="400" y="170" font-family="DM Serif Display, Georgia, serif" font-style="italic" font-size="64" fill="#f0732d" text-anchor="middle">Voice Agent</text>
+  <text x="400" y="215" font-family="DM Sans, sans-serif" font-size="20" fill="#a5a5b0" text-anchor="middle">Multi-lingual real-time AI phone agent</text>
+  <rect x="330" y="240" width="140" height="40" rx="20" fill="#1e1e2e" stroke="#f0732d" stroke-width="2"/>
+  <text x="400" y="266" font-family="DM Sans, sans-serif" font-size="16" font-weight="600" fill="#f0732d" text-anchor="middle">OPEN SOURCE</text>
+</svg>
