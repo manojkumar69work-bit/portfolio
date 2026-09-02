@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!-- ===================================================================
+         Deployment domain lives in exactly these places: the canonical
+         link, og:url, twitter/og image URLs, the JSON-LD @id/url fields,
+         public/sitemap.xml and public/robots.txt. Replace
+         https://manojethini.vercel.app everywhere if you move domains.
+         =================================================================== -->
+    <link rel="icon" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.json" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <meta name="theme-color" content="#fff8f4" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0a0a1a" media="(prefers-color-scheme: dark)" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Manoj Kumar Ethini.</title>
+
+    <script>
+      // Apply dark mode synchronously to prevent FOUC
+      try {
+        var saved = localStorage.getItem('darkMode');
+        if (saved === 'true') {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      } catch (e) {}
+    </script>
+    <style>
+      html, body {
+        margin: 0;
+        background: #fff8f4;
+      }
+      html[data-theme='dark'], html[data-theme='dark'] body {
+        background: #0a0a1a;
+      }
+    </style>
+
+    <meta
+      name="description"
+      content="Manoj Kumar Ethini — Fullstack Developer. Third-year CSE student who ships and deploys full-stack products end to end — FastAPI + PostgreSQL backends, Next.js frontends, and LLM/speech pipelines running live on Render, Vercel and Railway."
+    />
+    <meta name="author" content="Manoj Kumar Ethini" />
+    <meta
+      name="keywords"
+      content="Manoj Kumar Ethini, fullstack developer India, FastAPI developer, Python backend developer, Next.js developer, AI developer, MLR Institute of Technology, BunkMax, TruthVortex, voice AI agent, PostgreSQL, React developer"
+    />
+    <link rel="canonical" href="https://manojethini.vercel.app" />
+    <link rel="llms" type="text/plain" href="/llms.txt" title="LLM context about Manoj Kumar Ethini" />
+
+    <meta property="og:site_name" content="Manoj Kumar Ethini" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://manojethini.vercel.app" />
+    <meta property="og:title" content="Manoj Kumar Ethini — Fullstack Developer" />
+    <meta
+      property="og:description"
+      content="Backend-heavy fullstack developer. FastAPI + PostgreSQL, Next.js, and LLM/speech pipelines — three products live on Render, Vercel and Railway. Currently interning on a production college ERP."
+    />
+    <meta property="og:image" content="https://manojethini.vercel.app/logo512.png" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Manoj Kumar Ethini — Fullstack Developer" />
+    <meta
+      name="twitter:description"
+      content="Backend-heavy fullstack developer. FastAPI + PostgreSQL, Next.js, and LLM/speech pipelines — three products live on Render, Vercel and Railway."
+    />
+    <meta name="twitter:image:src" content="https://manojethini.vercel.app/logo512.png" />
+    <meta name="twitter:image:alt" content="Manoj Kumar Ethini — Fullstack Developer" />
+
+    <meta itemprop="name" content="Manoj Kumar Ethini" />
+    <meta
+      itemprop="description"
+      content="Backend-heavy fullstack developer. FastAPI + PostgreSQL, Next.js, and LLM/speech pipelines."
+    />
+    <meta itemprop="image" content="https://manojethini.vercel.app/logo512.png" />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "Person",
+            "@id": "https://manojethini.vercel.app/#person",
+            "name": "Manoj Kumar Ethini",
+            "alternateName": ["Manoj Ethini", "Manoj Kumar"],
+            "jobTitle": "Fullstack Developer",
+            "description": "Backend-heavy fullstack developer and third-year CSE student at MLR Institute of Technology, Hyderabad. Builds and deploys full-stack products end to end with FastAPI, PostgreSQL and Next.js, plus LLM and speech pipelines.",
+            "url": "https://manojethini.vercel.app",
+            "image": "https://manojethini.vercel.app/logo512.png",
+            "email": "manojkumar69.work@gmail.com",
+            "nationality": "Indian",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Hyderabad",
+              "addressRegion": "Telangana",
+              "addressCountry": "IN"
+            },
+            "alumniOf": {
+              "@type": "EducationalOrganization",
+              "name": "MLR Institute of Technology",
+              "alternateName": "MLRIT",
+              "url": "https://www.mlrinstitutions.ac.in"
+            },
+            "knowsAbout": [
+              "Python",
+              "FastAPI",
+              "PostgreSQL",
+              "SQLAlchemy",
+              "Next.js",
+              "React",
+              "TypeScript",
+              "Tailwind CSS",
+              "REST API design",
+              "LLM integration",
+              "Speech recognition",
+              "Text to speech",
+              "WebRTC",
+              "Docker",
+              "Payment integration"
+            ],
+            "sameAs": [
+              "https://github.com/manojkumar69work-bit",
+              "https://linkedin.com/in/manoj-kumar-ethini"
+            ],
+            "worksFor": {
+              "@type": "Organization",
+              "name": "MLR Institute of Technology",
+              "description": "Software development internship on the Campus Companion ERP"
+            }
+          },
+          {
+            "@type": "WebSite",
+            "@id": "https://manojethini.vercel.app/#website",
+            "url": "https://manojethini.vercel.app",
+            "name": "Manoj Kumar Ethini — Portfolio",
+            "description": "Personal portfolio of Manoj Kumar Ethini, backend-heavy fullstack developer.",
+            "author": { "@id": "https://manojethini.vercel.app/#person" },
+            "inLanguage": "en-US"
+          },
+          {
+            "@type": "FAQPage",
+            "@id": "https://manojethini.vercel.app/#faq",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "Who is Manoj Kumar Ethini?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Manoj Kumar Ethini is a backend-heavy fullstack developer and third-year Computer Science student at MLR Institute of Technology in Hyderabad. He has shipped three live products — BunkMax, TruthVortex and a multi-lingual AI voice agent — and currently interns on Campus Companion, his college's production ERP used by students and faculty."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is BunkMax?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "BunkMax is a subscription attendance tracker that syncs automatically with a college ERP. Manoj reverse-engineered the ERP's undocumented API from its shipped JavaScript bundles, then built Fernet-encrypted credential storage for daily re-sync, Razorpay payments with signature-verified webhooks, and 30+ REST endpoints on FastAPI and PostgreSQL — all tuned to run on Render's free tier."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is TruthVortex?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "TruthVortex is an AI Telugu news aggregator that scrapes roughly 30 RSS sources across 5 categories and summarizes each article into a 5–8 line Telugu summary. It uses a multi-provider AI pipeline — OpenRouter first with Groq as fallback — so a single provider outage cannot stall the feed."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What tech stack does Manoj Kumar Ethini use?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Python-first. On the backend: FastAPI, PostgreSQL, SQLAlchemy, Alembic and Django. On the frontend: Next.js, React 19, TypeScript and Tailwind CSS v4. For AI and speech: OpenRouter, Groq, Sarvam AI, edge-tts, Silero VAD and LiveKit. For infrastructure: Render, Vercel, Railway, Supabase, Firebase and Docker."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What does Manoj Kumar Ethini do at his internship?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "He is a Software Development Intern at MLR Institute of Technology, working in a team of six on Campus Companion, the live college ERP. He built the HR and faculty attendance module — late and LOP columns, alternating-LOP and half-day cost rules, faculty punch aggregation in SQL and the pending-regularization queue — fixed faculty workload reporting to measure weekly load in distinct slots, and led the mobile experience for the student and faculty portals."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "How was this portfolio built?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "React 19 and Vite with hand-written CSS. Motion drives the section transitions, GSAP ScrollTrigger drives the pinned horizontal journey, and Three.js with React Three Fiber renders the 3D scenes. It also has a desktop layer — draggable and resizable windows, a macOS-style dock and an xterm.js terminal with 31 commands — plus optional camera control built on MediaPipe hand and face landmarkers that runs entirely on-device."
+                }
+              }
+            ]
+          }
+        ]
+      }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>
