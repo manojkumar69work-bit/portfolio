@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Manoj Kumar Ethini — Resume</title>
+<style>
+  @page { size: A4; margin: 12mm 14mm; }
+  * { box-sizing: border-box; }
+  body {
+    font: 9.6pt/1.38 "Charter", "Georgia", "Times New Roman", serif;
+    color: #111; margin: 0;
+  }
+  h1 { font-size: 19pt; margin: 0 0 2pt; letter-spacing: .2pt; }
+  .contact { font-size: 8.7pt; color: #333; margin-bottom: 9pt; }
+  h2 {
+    font-size: 9.4pt; text-transform: uppercase; letter-spacing: 1pt;
+    margin: 11pt 0 4pt; padding-bottom: 1.5pt; border-bottom: .6pt solid #999;
+    break-after: avoid;
+  }
+  h3 { font-size: 10.2pt; margin: 7pt 0 1pt; break-after: avoid; }
+  h3:first-of-type { margin-top: 2pt; }
+  .meta { font-style: italic; font-size: 8.6pt; color: #444; margin: 0 0 3pt; }
+  p { margin: 0 0 3pt; }
+  ul { margin: 2pt 0 0; padding-left: 13pt; }
+  li { margin-bottom: 2.2pt; }
+  li, p { orphans: 2; widows: 2; }
+  .skills p { margin-bottom: 2.5pt; }
+  .skills b { display: inline-block; min-width: 62pt; }
+  code { font-family: "SF Mono", Menlo, monospace; font-size: 8.6pt; }
+  section { break-inside: avoid-page; }
+  a { color: inherit; text-decoration: none; }
+</style>
+</head>
+<body>
+
+<h1>Manoj Kumar Ethini</h1>
+<div class="contact">
+  B.Tech (CSE) · MLR Institute of Technology, Hyderabad · Expected 2028<br>
+  +91 84650 45490 · manojkumar69.work@gmail.com · github.com/manojkumar69work-bit
+</div>
+
+<h2>Summary</h2>
+<p>Third-year CSE student, currently interning on my college's production ERP system, who ships and
+deploys full-stack products end to end — FastAPI + PostgreSQL backends, Next.js frontends, and
+LLM/speech pipelines running live on Render, Vercel and Railway. Comfortable reverse-engineering an
+undocumented API, wiring payments, and operating a service inside free-tier memory and connection
+limits. Python-first.</p>
+
+<h2>Experience</h2>
+<section>
+<h3>Software Development Intern — MLR Institute of Technology, Hyderabad</h3>
+<p class="meta">Campus Companion (college ERP) · Jul 2026 – Present · Next.js App Router, Supabase (PostgreSQL), Shadcn UI</p>
+<p>Building features in a live ERP used by students and faculty across the college, in a team of 6 developers.</p>
+<ul>
+  <li>Built the <b>HR/faculty attendance module</b>: late and LOP columns on attendance summaries, alternating-LOP and half-day cost rules, faculty punch aggregation in SQL, and a dashboard queue for pending regularizations.</li>
+  <li>Fixed faculty workload reporting to measure weekly load in distinct slots and surface timetable conflicts; corrected Sundays being counted absent instead of week-off.</li>
+  <li>Resolved biometric employee-code mapping against faculty records so punch data reconciled correctly with the attendance system.</li>
+  <li>Led the <b>mobile experience</b> for both student and faculty portals — greeting headers, vertical home layouts, collapsible profiles, frosted nav — and refactored both to share one page-search dialog.</li>
+  <li>Authored the CSE III-I (Sem V) timetable SQL seed covering all 7 sections.</li>
+</ul>
+</section>
+
+<h2>Skills</h2>
+<div class="skills">
+<p><b>Languages</b> Python, TypeScript/JavaScript, SQL, Java</p>
+<p><b>Backend</b> FastAPI, REST API design, PostgreSQL, Supabase, psycopg2 connection pooling, JWT auth, rate limiting, webhooks, cron jobs</p>
+<p><b>Frontend</b> Next.js 15/16 (App Router), React 19, Tailwind CSS, Shadcn UI, Zustand</p>
+<p><b>AI / ML</b> LLM APIs (OpenRouter, Groq, Sarvam), multi-provider fallback pipelines, prompt design, speech-to-text/text-to-speech, scikit-learn, Streamlit</p>
+<p><b>Infra / Tools</b> Docker, Render, Vercel, Railway, NextAuth, Firebase (Auth + Cloud Messaging), Razorpay, Git, BeautifulSoup, feedparser, n8n</p>
+</div>
+
+<h2>Projects</h2>
+<section>
+<h3>BunkMax — attendance tracker with automated college-ERP sync</h3>
+<p class="meta">Solo · Python, FastAPI, PostgreSQL (Supabase), Next.js 16, NextAuth, Firebase, Razorpay · 79 commits · Mar–Aug 2026</p>
+<ul>
+  <li>Built a subscription SaaS that tells students exactly how many classes they can miss, replacing manual attendance math for the whole campus.</li>
+  <li><b>Reverse-engineered the college ERP portal's undocumented API</b> (<code>portal.vmedulife.com</code>) by decoding its shipped JS bundles — worked out the base64-encoded request payloads, nested-base64 session cookie, and Origin/Referer guards — to pull subject-wise attendance with one tap instead of copy-paste.</li>
+  <li>Migrated the sync to the college's replacement portal (CampusHub) behind an unchanged client interface — Supabase password auth per roll number plus a Bearer-token timetable route — so one login now imports both attendance and the weekly timetable, surfaced live on the import page.</li>
+  <li>Stored ERP credentials encrypted (Fernet) to enable daily automated re-sync, and kept the manual paste flow as a fallback.</li>
+  <li>Integrated Razorpay orders, checkout and signature-verified webhooks for paid subscriptions; built 30+ REST endpoints plus morning/evening push-notification cron jobs.</li>
+  <li>Tuned deployment for Render's free tier — single uvicorn worker for an I/O-bound workload, DB pool capped under Supabase's pooler budget, <code>/health</code> keep-warm ping.</li>
+</ul>
+</section>
+
+<section>
+<h3>TruthVortex — AI Telugu news aggregator <i>(live)</i></h3>
+<p class="meta">Solo · FastAPI, PostgreSQL, Next.js 15, React 19, Tailwind v4 · truthvortex-sigma.vercel.app</p>
+<ul>
+  <li>TV-style news dashboard that scrapes ~30 RSS sources across 5 categories and summarizes each article into 5–8 line <b>Telugu</b> summaries.</li>
+  <li>Built a <b>multi-provider AI pipeline</b> (OpenRouter primary, Groq fallback) so a single provider outage or rate limit can't stall the feed.</li>
+  <li>Background scraper thread every 30 min with fuzzy deduplication, category normalization, and automatic deletion of articles older than 2 days to stay inside free-tier storage.</li>
+  <li>Hardened for production: fixed a DB connection-pool race condition, added per-IP rate limiting (slowapi), CSP headers, an image proxy fallback, and a React error boundary for crash resilience.</li>
+</ul>
+</section>
+
+<section>
+<h3>Multi-lingual Voice Agent — real-time Hinglish lead-capture agent</h3>
+<p class="meta">Solo · Python, FastAPI, WebRTC, Sarvam AI, edge-tts, Twilio, PyJWT, Docker</p>
+<ul>
+  <li>Real-time AI phone agent for real-estate lead capture that speaks <b>Hinglish</b> and understands mixed Hindi/English speech, built as a multi-tenant product.</li>
+  <li>Designed tenant isolation: each agency gets its own prompt, language, agent name, minute quota and login, and can never read another tenant's calls, recordings or leads.</li>
+  <li>Per-call automatic summary, structured lead extraction and transcript, with CSV export and delivery to Google Sheets / WhatsApp.</li>
+  <li>Auth via signed-cookie JWT sessions with no extra dependencies; admin portal for onboarding and quota management.</li>
+</ul>
+</section>
+
+<h2>Certifications</h2>
+<ul>
+  <li><b>Cloud Computing</b> — NPTEL / SWAYAM (IIT) · Jan–Apr 2026 · <b>Elite — 71/100</b> (assignments 25/25)</li>
+  <li><b>Quantitative Research Job Simulation</b> — JPMorgan Chase &amp; Co. (Forage) · Jan 2026 — price data analysis, commodity storage contract pricing, credit risk analysis, FICO score bucketing</li>
+  <li><b>Claude Code in Action</b> — Anthropic · <i>Certificate 9j97eytfeyqh</i></li>
+  <li><b>Data Analytics Job Simulation</b> — Deloitte (Forage) · Feb 2026 — data analysis, forensic technology</li>
+</ul>
+
+<h2>Education</h2>
+<p><b>B.Tech, Computer Science and Engineering</b> — MLR Institute of Technology, Hyderabad<br>
+Expected 2028 · CGPA: 7.8 / 10</p>
+
+</body>
+</html>
