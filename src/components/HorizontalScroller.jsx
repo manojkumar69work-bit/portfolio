@@ -92,7 +92,7 @@ export default function HorizontalScroller({ dark }) {
         <div className="horizontal-scroller__viewport" ref={viewportRef} onScroll={onViewportScroll}>
           <div className="horizontal-scroller__track" ref={trackRef}>
             {SCROLLER_PANELS.map((panel, i) => (
-              <article className={`horizontal-scroller__panel scene-${panel.scene}`} key={panel.kicker}>
+              <article className="horizontal-scroller__panel" key={panel.kicker}>
                 <p className="horizontal-scroller__kicker">{panel.kicker}</p>
                 <h2 className="horizontal-scroller__title">{panel.title}</h2>
                 <p className="horizontal-scroller__body">{panel.body}</p>

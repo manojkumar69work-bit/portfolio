@@ -10,8 +10,8 @@ import { AmbientField, BallText, GridScene, PartsAssembling, RobotScene, slice }
 const LAYOUT = [
   { key: 'parts-assembling', from: 0.0, to: 0.28 },
   { key: 'ball-text', from: 0.26, to: 0.52 },
-  { key: 'robot-canvas', from: 0.5, to: 0.76 },
-  { key: 'car-canvas', from: 0.74, to: 1.0 },
+  { key: 'grid-scene', from: 0.5, to: 0.76 },
+  { key: 'robot-scene', from: 0.74, to: 1.0 },
 ]
 
 const RAMP = 0.2
@@ -37,8 +37,8 @@ function Scenes({ progress, dark }) {
       <group key={key} scale={p}>
         {key === 'parts-assembling' && <PartsAssembling t={t} dark={dark} />}
         {key === 'ball-text' && <BallText t={t} dark={dark} />}
-        {key === 'robot-canvas' && <RobotScene t={t} dark={dark} />}
-        {key === 'car-canvas' && <GridScene t={t} dark={dark} />}
+        {key === 'grid-scene' && <GridScene t={t} dark={dark} />}
+        {key === 'robot-scene' && <RobotScene t={t} dark={dark} />}
       </group>
     )
   })
