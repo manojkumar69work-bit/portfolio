@@ -263,7 +263,7 @@ export const COMMANDS = {
         `${B}manoj${R}${D}@${R}${B}portfolio${R}`,
         `${GREY}───────────────────────${R}`,
         `${ORANGE}Role${R}     ${PROFILE.role}`,
-        `${ORANGE}Studying${R} B.Tech CSE, MLRIT (III yr)`,
+        `${ORANGE}Studying${R} B.Tech CSE, MLRIT — expected 2028, CGPA 7.8/10`,
         `${ORANGE}Stack${R}    FastAPI · Postgres · Next.js`,
         `${ORANGE}Shipped${R}  3 live products`,
         `${ORANGE}Host${R}     ${navigator.platform ?? 'web'}`,
