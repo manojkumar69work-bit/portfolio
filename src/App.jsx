@@ -49,6 +49,8 @@ function Desktop() {
   const [matrixOn, setMatrixOn] = useState(false)
   const greeted = useRef(false)
 
+  const dismissMatrix = useCallback(() => setMatrixOn(false), [])
+
   /* ---------- theme ---------- */
 
   const setTheme = useCallback((next) => {
@@ -284,7 +286,7 @@ function Desktop() {
       <CameraFeedback />
       <CustomMouse />
 
-      <MatrixRain active={matrixOn} onDismiss={() => setMatrixOn(false)} />
+      <MatrixRain active={matrixOn} onDismiss={dismissMatrix} />
 
       <ToastContainer
         position="bottom-right"

@@ -7,6 +7,12 @@ const GLYPHS = 'アイウエオカキクケコサシスセソタチツテトナ�
 export default function MatrixRain({ active, onDismiss }) {
   const canvasRef = useRef(null)
 
+  /* Held in a ref and kept out of the effect deps: the parent re-renders on every
+     scroll event, and a fresh onDismiss closure would otherwise tear down the
+     effect mid-animation, re-randomising the drops and restarting the rain. */
+  const onDismissRef = useRef(onDismiss)
+  onDismissRef.current = onDismiss
+
   useEffect(() => {
     if (!active) return
     const canvas = canvasRef.current
@@ -52,7 +58,7 @@ export default function MatrixRain({ active, onDismiss }) {
     raf = requestAnimationFrame(draw)
 
     const onKey = (e) => {
-      if (e.key === 'Escape') onDismiss()
+      if (e.key === 'Escape') onDismissRef.current()
     }
     window.addEventListener('keydown', onKey)
 
@@ -61,7 +67,7 @@ export default function MatrixRain({ active, onDismiss }) {
       window.removeEventListener('resize', resize)
       window.removeEventListener('keydown', onKey)
     }
-  }, [active, onDismiss])
+  }, [active])
 
   return (
     <AnimatePresence>
