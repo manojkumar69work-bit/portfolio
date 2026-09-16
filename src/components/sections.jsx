@@ -1,7 +1,7 @@
 import { AnimatePresence, motion, useInView } from 'motion/react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 
-import { BOTTOM_TEXTS, EMAIL, GITHUB, HERO_WORDS, STATS, WORK_EXPERIENCE, workTabs } from '../data.js'
+import { BOTTOM_TEXTS, EMAIL, GITHUB, HERO_WORDS, LINKEDIN, SKILL_GROUPS, STATS, WORK_EXPERIENCE, workTabs } from '../data.js'
 import { ArrowRightIcon, GithubIcon, LinkIcon, LiveIcon, MoonIcon, StatIcon, SunIcon } from '../icons.jsx'
 
 import l_icon1 from '../assets/skills/light/icon1.webp'
@@ -100,7 +100,7 @@ function ScrambleText({ texts, speed = 100, pauseDuration = 1000, style }) {
 /* ---------- Navbar ---------- */
 
 export function Navbar({ dark, onToggleTheme }) {
-  const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 600px)').matches
+  const isMobile = useIsMobile()
   const [isHovered, setIsHovered] = useState(false)
 
   useEffect(() => {
@@ -200,7 +200,7 @@ export function Navbar({ dark, onToggleTheme }) {
 /* ---------- Hero ---------- */
 
 export function Hero() {
-  const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 600px)').matches
+  const isMobile = useIsMobile()
   const [currentTextIndex, setCurrentTextIndex] = useState(0)
   const [introDone, setIntroDone] = useState(false)
 
@@ -648,17 +648,40 @@ export function Skills() {
   const iconUrls = themeDark ? DARK_ICONS : LIGHT_ICONS
 
   return (
-    <div className="skills-container" ref={ref} id="skills">
-      <p className="main-text">
-        Build. Break. Learn.
-      </p>
-      <SkillsCanvas
-        iconUrls={iconUrls}
-        isMobile={isMobile}
-        triggerEntrance={inView && !entranceDoneRef.current}
-        active={active}
-      />
-    </div>
+    <>
+      <div className="skills-container" ref={ref} id="skills">
+        <p className="main-text">
+          Build. Break. Learn.
+        </p>
+        <SkillsCanvas
+          iconUrls={iconUrls}
+          isMobile={isMobile}
+          triggerEntrance={inView && !entranceDoneRef.current}
+          active={active}
+        />
+      </div>
+      {/* The canvas above shows icons only. Without this a visitor who never opens
+          the terminal cannot read a single technology name. Sits outside
+          .skills-container because that box is a fixed-height stage the canvas
+          is absolutely positioned over. */}
+      <section className="skill-groups" aria-label="Technologies">
+        <h2 className="skill-groups__heading">
+          The <span className="orange">stack</span>, in full.
+        </h2>
+        <dl className="skill-groups__list">
+          {SKILL_GROUPS.map((group) => (
+            <div className="skill-group" key={group.name}>
+              <dt className="skill-group__name">{group.name}</dt>
+              <dd className="skill-group__items">
+                {group.items.map((item) => (
+                  <span key={item}>{item}</span>
+                ))}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </section>
+    </>
   )
 }
 
@@ -745,7 +768,7 @@ export function FindMyWork({ onOpenProject }) {
 /* ---------- Numbers and stats ---------- */
 
 function NumberStatsCard({ icon, frontCard }) {
-  const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 600px)').matches
+  const isMobile = useIsMobile()
   return (
     <motion.div
       className={`card ${frontCard ? 'front-card' : 'back-card'}`}
@@ -869,12 +892,13 @@ function WorkExperienceSection({ exp }) {
       className="work-experience-section"
       initial={{ opacity: 0, y: 60 }}
       animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.8, ease: 'power2.out' }}
+      transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94] }}
     >
       <h2 className="job-title">
         {exp.title} @ <span className="orange">{exp.company}</span>
       </h2>
       <div className="duration">{exp.date}</div>
+      {exp.stack && <div className="duration">{exp.stack}</div>}
       <ul className="work-ex-points">
         {exp.points.map((point, i) => (
           <li key={i} dangerouslySetInnerHTML={{ __html: point }} />
@@ -916,6 +940,7 @@ export function Footer() {
   const links = [
     { name: 'Email.', href: `mailto:${EMAIL}` },
     { name: 'Github.', href: GITHUB },
+    { name: 'LinkedIn.', href: LINKEDIN },
     { name: 'Resume.', href: '/resume.html' },
   ]
 
@@ -933,6 +958,9 @@ export function Footer() {
           </a>
         ))}
       </div>
+      <p className="footer-note">
+        Graduating 2028 · open to internships and full-time roles in backend and AI engineering.
+      </p>
     </div>
   )
 }

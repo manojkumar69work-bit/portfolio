@@ -1426,3 +1426,102 @@ body::before {
     font-size: 14px;
   }
 }
+/* ---------- Skill groups ----------
+   The skills canvas above renders icons only, so this is the only place a
+   visitor can read the technology names without opening the terminal. Kept
+   typographic rather than carded — the rest of the page is airy, and a grid of
+   bordered boxes reads as a template next to it. Shares SKILL_GROUPS with the
+   `skills` terminal command. */
+
+.skill-groups {
+  width: min(920px, calc(100% - 48px));
+  margin: -80px auto 140px;
+  position: relative;
+  z-index: 1;
+}
+
+.skill-groups__heading {
+  font-family: var(--font-serif);
+  font-size: 34px;
+  font-weight: 400;
+  color: var(--black);
+  text-align: center;
+  margin: 0 0 8px;
+}
+
+.skill-groups__list {
+  margin: 0;
+}
+
+/* Label left, technologies right, hairline between rows. */
+.skill-group {
+  display: grid;
+  grid-template-columns: 148px 1fr;
+  gap: 24px;
+  align-items: baseline;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.skill-group:first-child {
+  border-top: 1px solid var(--hairline);
+}
+
+.skill-group__name {
+  margin: 0;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--primary-orange);
+}
+
+.skill-group__items {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--text-grey);
+}
+
+.skill-group__items span:not(:last-child)::after {
+  content: "·";
+  margin: 0 9px;
+  opacity: 0.4;
+}
+
+@media (max-width: 700px) {
+  .skill-groups {
+    width: calc(100% - 32px);
+    margin: 0 auto 90px;
+  }
+
+  .skill-groups__heading {
+    font-size: 26px;
+    margin-bottom: 4px;
+  }
+
+  .skill-group {
+    grid-template-columns: 1fr;
+    gap: 7px;
+    padding: 15px 0;
+  }
+
+  .skill-group__items {
+    font-size: 14px;
+  }
+}
+
+/* The footer background is dark in the light theme and light in the dark theme,
+   so this note's colour inverts with it. */
+.footer-note {
+  flex-basis: 100%;
+  margin: 8px 0 0;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+[data-theme="dark"] .footer-note {
+  color: rgba(17, 17, 17, 0.72);
+}
