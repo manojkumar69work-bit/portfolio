@@ -1,14 +1,14 @@
 export const EMAIL = 'manojkumar69.work@gmail.com'
 export const GITHUB = 'https://github.com/manojkumar69work-bit'
 export const LINKEDIN = 'https://linkedin.com/in/manoj-kumar-ethini'
-export const SITE = 'https://www.manojethini.com'
+export const SITE = 'https://manoj-kumarrr.vercel.app'
 
 export const PROFILE = {
   name: 'Manoj Kumar Ethini',
   role: 'Fullstack Developer',
   tagline: 'Backend-heavy fullstack developer. Python-first. Ships and deploys end to end.',
   location: 'Hyderabad, India',
-  education: 'B.Tech Computer Science — MLR Institute of Technology (III year)',
+  education: 'B.Tech Computer Science — MLR Institute of Technology · Expected 2028 · CGPA 7.8/10',
   interests: ['Backend Engineering', 'AI Products', 'Shipping'],
 }
 
@@ -31,20 +31,28 @@ export const SKILL_NAMES = [
 
 export const SKILL_GROUPS = [
   {
+    name: 'Languages',
+    items: ['Python', 'TypeScript', 'JavaScript', 'SQL', 'Java', 'C'],
+  },
+  {
     name: 'Backend',
-    items: ['Python', 'FastAPI', 'Django', 'PostgreSQL', 'MySQL', 'SQLAlchemy', 'Alembic', 'REST APIs', 'Celery-style cron jobs'],
+    items: ['FastAPI', 'Django', 'NestJS', 'PostgreSQL', 'MySQL', 'SQLite', 'SQLAlchemy', 'Alembic', 'REST APIs', 'JWT auth', 'psycopg2 pooling', 'Rate limiting', 'Webhooks', 'Celery-style cron jobs'],
   },
   {
     name: 'Frontend',
-    items: ['Next.js', 'React 19', 'TypeScript', 'JavaScript', 'Tailwind CSS v4', 'Motion', 'Three.js'],
+    items: ['Next.js', 'React 19', 'Tailwind CSS v4', 'Shadcn UI', 'TanStack Query', 'Zustand', 'Motion', 'Three.js', 'Flutter'],
   },
   {
     name: 'AI & Speech',
-    items: ['OpenRouter', 'Groq', 'Sarvam AI', 'edge-tts', 'Silero VAD', 'LiveKit / WebRTC', 'MediaPipe'],
+    items: ['OpenRouter', 'Groq', 'Sarvam AI', 'edge-tts', 'Silero VAD', 'LiveKit / WebRTC', 'MediaPipe', 'scikit-learn', 'Streamlit'],
   },
   {
     name: 'Infra & Tools',
-    items: ['Render', 'Vercel', 'Railway', 'Supabase', 'Firebase', 'Google Cloud', 'Docker', 'Git', 'GitHub Actions', 'Razorpay'],
+    items: ['Render', 'Vercel', 'Railway', 'Supabase', 'AWS RDS', 'Firebase', 'Google Cloud', 'Docker', 'Git', 'GitHub Actions', 'NextAuth', 'Razorpay', 'n8n', 'BeautifulSoup', 'feedparser'],
+  },
+  {
+    name: 'Data & Geo',
+    items: ['Leaflet', 'OpenStreetMap (OSRM, Overpass)', 'Zerodha Kite Connect', 'yfinance', 'NSE disclosure feeds'],
   },
 ]
 
@@ -105,6 +113,7 @@ export const workTabs = [
             'Tenant isolation — each agency gets its own prompt, language, agent name, minute quota and login, with no cross-tenant access',
             'Per-call automatic summary, structured lead extraction and transcript, with CSV export and delivery to Google Sheets / WhatsApp',
             'Sentence-level TTS streaming, barge-in via Silero VAD at 0.4s endpointing, Hindi language hint on ASR for code-switched speech',
+            'Speech pipeline falls back Sarvam AI → edge-tts, the same multi-provider pattern the LLM side uses (OpenRouter → Groq), so no single vendor can take a call down',
             'Auth via signed-cookie JWT sessions; admin portal for onboarding and quota management',
           ],
         },
@@ -197,13 +206,16 @@ export const WORK_EXPERIENCE = [
     title: 'Software Development Intern',
     company: 'MLR Institute of Technology',
     date: 'Jul 2026 - Present',
+    stack: 'Next.js 16 · TypeScript · PostgreSQL · Shadcn UI · campushub.mlrit.ac.in',
     points: [
-      "Building features in a live college ERP (Campus Companion) used by students and faculty across the college, in a team of <span class='black'>6 developers</span>",
-      "Built the <span class='black'>HR/faculty attendance module</span> — late and LOP columns, alternating-LOP and half-day cost rules, faculty punch aggregation in SQL, pending-regularization dashboard queue",
-      "Fixed faculty workload reporting to measure weekly load in <span class='black'>distinct slots</span> and surface timetable conflicts; corrected Sundays being counted absent",
-      "Resolved biometric employee-code mapping against faculty records so <span class='black'>punch data reconciled</span> correctly",
-      "Led the <span class='black'>mobile experience</span> for student and faculty portals — greeting headers, vertical home layouts, collapsible profiles, frosted nav, shared page-search dialog",
-      "Authored the <span class='black'>CSE III-I (Sem V) timetable SQL seed</span> covering all 7 sections",
+      "Feature owner on a live college ERP spanning <span class='black'>17 role-based portals</span> — team of 7, <span class='black'>115 commits</span>, shipped through PR review",
+      "Own the <span class='black'>attendance and HR/leave domain</span> end to end — schema, migrations, API, UI and release",
+      "Encoded <span class='black'>payroll-affecting policy</span> in SQL — LOP and half-day rules, week-offs excluded, leave-aware punch summary",
+      "Built the faculty <span class='black'>leave system</span> — snapshot cutoffs, CCL proof upload, Academic Leave and OD under a shared cap",
+      "Re-architected attendance into <span class='black'>per-period sessions</span> so every hour of a lab block marks and reports on its own",
+      "Shipped the <span class='black'>monthly attendance report</span> — theory/lab split with CSV and Excel export",
+      "Delivered through the team's <span class='black'>Supabase → AWS RDS migration</span>, merging it into production",
+      "Led the <span class='black'>mobile experience</span> for both portals, folding duplicate flows into one shared dialog",
     ],
   },
 ]
@@ -211,7 +223,7 @@ export const WORK_EXPERIENCE = [
 export const STATS = [
   { value: '3+', label: 'Live Products', icon: 'rocket' },
   { value: '30+', label: 'REST Endpoints', icon: 'server' },
-  { value: '79+', label: 'Commits on BunkMax', icon: 'git' },
+  { value: '103+', label: 'Commits on BunkMax', icon: 'git' },
   { value: '4', label: 'AI Fallback Providers', icon: 'sparkles' },
 ]
 
@@ -224,7 +236,9 @@ export const BOTTOM_TEXTS = [
   `Interests: <span class="black"> Backend Engineering, AI Products, and Shipping. </span>`,
 ]
 
-/* Panels for the GSAP-pinned horizontal scroller */
+/* Panels for the GSAP-pinned horizontal scroller. `scene` names the 3D scene that
+   plays behind each panel — the actual wiring is LAYOUT order in three/JourneyCanvas.jsx,
+   so the two lists must stay in the same order. */
 export const SCROLLER_PANELS = [
   {
     kicker: '01 — Backend',
