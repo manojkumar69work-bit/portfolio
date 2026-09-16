@@ -7,6 +7,22 @@ import { useWindows } from './WindowManager.jsx'
 const MIN_W = 320
 const MIN_H = 220
 
+/* How much of a window must stay inside the viewport. Enough that the header —
+   and with it the traffic lights — is always grabbable, so a window can never be
+   dragged somewhere it can't be dragged back from. */
+const KEEP_VISIBLE = 160
+
+function clampToViewport({ x, y, width, height }) {
+  const maxX = window.innerWidth
+  const maxY = window.innerHeight
+  return {
+    x: Math.min(Math.max(x, -width + KEEP_VISIBLE), maxX - KEEP_VISIBLE),
+    y: Math.min(Math.max(y, 8), maxY - 60),
+    width,
+    height,
+  }
+}
+
 function useIsMobileWindow() {
   const [mobile, setMobile] = useState(() => window.matchMedia('(max-width: 700px)').matches)
   useEffect(() => {
@@ -68,17 +84,20 @@ export default function DraggableWindow({ win, children, onMinimizeStart }) {
       if (!state || !node) return
       const dx = e.clientX - state.startX
       const dy = e.clientY - state.startY
-      const maxX = window.innerWidth
-      const maxY = window.innerHeight
-
       let nx = state.originX
       let ny = state.originY
       let nw = state.originW
       let nh = state.originH
 
       if (!state.edges) {
-        nx = Math.min(Math.max(state.originX + dx, -state.originW + 120), maxX - 120)
-        ny = Math.min(Math.max(state.originY + dy, 8), maxY - 60)
+        const clamped = clampToViewport({
+          x: state.originX + dx,
+          y: state.originY + dy,
+          width: state.originW,
+          height: state.originH,
+        })
+        nx = clamped.x
+        ny = clamped.y
       } else {
         if (state.edges.includes('right')) nw = Math.max(MIN_W, state.originW + dx)
         if (state.edges.includes('bottom')) nh = Math.max(MIN_H, state.originH + dy)
@@ -112,6 +131,19 @@ export default function DraggableWindow({ win, children, onMinimizeStart }) {
       window.removeEventListener('pointercancel', onUp)
     }
   }, [commit])
+
+  /* Shrinking the viewport (or waking on a smaller display) would otherwise leave
+     windows stranded outside it with no way to reach them, since the dock can
+     restore a window but not reposition it. */
+  useEffect(() => {
+    if (isMobile || maximized || minimized) return
+    const onResize = () => {
+      const next = clampToViewport({ x, y, width, height })
+      if (next.x !== x || next.y !== y) commit(next)
+    }
+    window.addEventListener('resize', onResize)
+    return () => window.removeEventListener('resize', onResize)
+  }, [isMobile, maximized, minimized, x, y, width, height, commit])
 
   /* Minimise plays a short genie toward the dock before the window
      is flagged minimised in the store. */
