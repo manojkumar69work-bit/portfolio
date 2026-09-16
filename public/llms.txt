@@ -1,0 +1,60 @@
+# Manoj Kumar Ethini
+
+> Backend-heavy fullstack developer. Python-first. Ships and deploys end to end.
+> Third-year B.Tech CSE student at MLR Institute of Technology, Hyderabad (expected 2028).
+> Site: https://manoj-kumarrr.vercel.app
+
+## About
+
+Third-year CSE student interning on his college's production ERP, where he owns the
+attendance and HR/leave domain across a 17-portal system used daily by the whole campus.
+Outside it he ships and deploys full-stack products end to end — FastAPI + PostgreSQL
+backends, Next.js frontends, and LLM/speech pipelines running live on Render, Vercel and
+Railway. Comfortable reverse-engineering an undocumented API, wiring payments, and
+operating a service inside free-tier memory and connection limits.
+
+## Experience
+
+Software Development Intern — MLR Institute of Technology (Jul 2026 – Present)
+Campus Companion, the live college ERP at campushub.mlrit.ac.in. Feature owner across
+17 role-based portals in a team of 7, one of the two most active contributors with
+115 commits, working through PR review. Owns the attendance and HR/leave domain end to
+end — schema, SQL migrations, API routes, UI and release. Built the faculty leave system,
+re-architected attendance around per-period sessions, shipped the monthly attendance
+report with CSV/Excel export, and delivered features through the team's Supabase to
+AWS RDS migration.
+Stack: Next.js 16, TypeScript, PostgreSQL (Supabase → AWS RDS), Shadcn UI.
+
+## Projects
+
+- BunkMax — https://bunk-max.vercel.app — Attendance tracker with automated college-ERP
+  sync. Subscription SaaS telling students exactly how many classes they can miss.
+  Reverse-engineered the ERP's undocumented API, Fernet-encrypted credential storage for
+  daily re-sync, Razorpay orders and signature-verified webhooks, 30+ REST endpoints and
+  push-notification cron jobs. Code: https://github.com/manojkumar69work-bit/BunkMax
+
+- TruthVortex — https://truthvortex-sigma.vercel.app — AI Telugu news aggregator scraping
+  ~30 RSS sources across 5 categories into 5–8 line Telugu summaries. Multi-provider AI
+  pipeline (OpenRouter primary, Groq fallback), background scraper with fuzzy
+  deduplication, per-IP rate limiting and CSP headers.
+  Code: https://github.com/manojkumar69work-bit/truthvortex
+
+- Multi-lingual Voice Agent — Speech pipeline with sentence-level TTS streaming, barge-in
+  via Silero VAD, and a Hindi language hint on ASR so code-switching does not break it.
+  Every call produces a summary, a structured lead and a transcript.
+  Code: https://github.com/manojkumar69work-bit/Multi-lingual-Voice-Agents
+
+## Stack
+
+Backend: Python, FastAPI, Django, PostgreSQL, MySQL, SQLAlchemy, Alembic, REST APIs
+Frontend: Next.js, React 19, TypeScript, Tailwind CSS v4, Motion, Three.js
+AI/Speech: OpenRouter, Groq, Sarvam AI, edge-tts, Silero VAD, LiveKit, MediaPipe
+Infra: Render, Vercel, Railway, Supabase, Firebase, Docker, Git, GitHub Actions, Razorpay
+Data/Geo: Leaflet, OpenStreetMap (OSRM routing, Overpass), Zerodha Kite Connect, yfinance
+
+## Contact
+
+- Email: manojkumar69.work@gmail.com
+- GitHub: https://github.com/manojkumar69work-bit
+- LinkedIn: https://linkedin.com/in/manoj-kumar-ethini
+- Resume: https://manoj-kumarrr.vercel.app/resume.html
