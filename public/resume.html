@@ -49,14 +49,16 @@ limits. Python-first.</p>
 <h2>Experience</h2>
 <section>
 <h3>Software Development Intern — MLR Institute of Technology, Hyderabad</h3>
-<p class="meta">Campus Companion (college ERP) · Jul 2026 – Present · Next.js App Router, Supabase (PostgreSQL), Shadcn UI</p>
-<p>Building features in a live ERP used by students and faculty across the college, in a team of 6 developers.</p>
+<p class="meta">Campus Companion (college ERP) · Jul 2026 – Present · Next.js 16, TypeScript, PostgreSQL (Supabase → AWS RDS), Shadcn UI · campushub.mlrit.ac.in</p>
+<p>Feature owner on a live ERP serving <b>17 role-based portals</b> — students, faculty, HODs, deans, and the administrative offices around them (HR, library, hostel, transport, sports, admin, principal, management) — in a team of 7, where I'm one of the two most active contributors (115 commits) and work through PR review.</p>
 <ul>
-  <li>Built the <b>HR/faculty attendance module</b>: late and LOP columns on attendance summaries, alternating-LOP and half-day cost rules, faculty punch aggregation in SQL, and a dashboard queue for pending regularizations.</li>
-  <li>Fixed faculty workload reporting to measure weekly load in distinct slots and surface timetable conflicts; corrected Sundays being counted absent instead of week-off.</li>
-  <li>Resolved biometric employee-code mapping against faculty records so punch data reconciled correctly with the attendance system.</li>
-  <li>Led the <b>mobile experience</b> for both student and faculty portals — greeting headers, vertical home layouts, collapsible profiles, frosted nav — and refactored both to share one page-search dialog.</li>
-  <li>Authored the CSE III-I (Sem V) timetable SQL seed covering all 7 sections.</li>
+  <li><b>Own the attendance and HR/leave domain end to end</b> — database schema and SQL migrations, API routes, UI, and release — across the faculty, HR, HOD and attendance-office portals.</li>
+  <li>Encoded <b>payroll-affecting policy</b> in the data layer: late and LOP columns on attendance summaries, alternating-LOP and half-day cost rules, week-offs and declared holidays excluded from every count, and a leave-aware <code>faculty_punch_summary</code> so an approved leave day never reads as absent.</li>
+  <li>Built the faculty <b>leave system</b> — ML release schedule with snapshot cutoffs, CCL proof upload surfaced to the approving HOD, Academic Leave and OD under a shared yearly cap with proof attachment, and balances tallied against approvals.</li>
+  <li>Re-architected attendance around <b>per-period sessions</b> so each hour of a multi-period lab block marks, counts and reports independently — one change spanning the timetable renderer, faculty marking screen, student records and the monthly report.</li>
+  <li>Shipped the <b>monthly attendance report</b> end to end: API, theory/lab split, and CSV/Excel export for administrative filing.</li>
+  <li>Delivered features continuously <b>through the team's Supabase → AWS RDS migration</b>, merging the migration branch into production, and reconciled third-party biometric punch data against faculty employee records.</li>
+  <li>Led the <b>mobile experience</b> for both student and faculty portals, consolidating duplicated flows into one shared page-search dialog and account menu.</li>
 </ul>
 </section>
 
@@ -72,7 +74,7 @@ limits. Python-first.</p>
 <h2>Projects</h2>
 <section>
 <h3>BunkMax — attendance tracker with automated college-ERP sync</h3>
-<p class="meta">Solo · Python, FastAPI, PostgreSQL (Supabase), Next.js 16, NextAuth, Firebase, Razorpay · 79 commits · Mar–Aug 2026</p>
+<p class="meta">Solo · Python, FastAPI, PostgreSQL (Supabase), Next.js 16, NextAuth, Firebase, Razorpay · 103 commits · Mar–Aug 2026</p>
 <ul>
   <li>Built a subscription SaaS that tells students exactly how many classes they can miss, replacing manual attendance math for the whole campus.</li>
   <li><b>Reverse-engineered the college ERP portal's undocumented API</b> (<code>portal.vmedulife.com</code>) by decoding its shipped JS bundles — worked out the base64-encoded request payloads, nested-base64 session cookie, and Origin/Referer guards — to pull subject-wise attendance with one tap instead of copy-paste.</li>
