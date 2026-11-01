@@ -33,7 +33,7 @@ Stack: Next.js 16, TypeScript, PostgreSQL (Supabase → AWS RDS), Shadcn UI.
   daily re-sync, Razorpay orders and signature-verified webhooks, 30+ REST endpoints and
   push-notification cron jobs. Code: https://github.com/manojkumar69work-bit/BunkMax
 
-- TruthVortex — https://truthvortex-sigma.vercel.app — AI Telugu news aggregator scraping
+- TruthVortex — https://truthvortex.vercel.app — AI Telugu news aggregator scraping
   ~30 RSS sources across 5 categories into 5–8 line Telugu summaries. Multi-provider AI
   pipeline (OpenRouter primary, Groq fallback), background scraper with fuzzy
   deduplication, per-IP rate limiting and CSP headers.

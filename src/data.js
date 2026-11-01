@@ -85,7 +85,7 @@ export const workTabs = [
         img: '/work/truthvortex.svg',
         url: {
           githubUrl: 'https://github.com/manojkumar69work-bit/truthvortex',
-          liveUrl: 'https://truthvortex-sigma.vercel.app',
+          liveUrl: 'https://truthvortex.vercel.app',
         },
         modalData: {
           title: 'TruthVortex',
@@ -142,7 +142,7 @@ export const workTabs = [
         img: '/work/truthvortex.svg',
         url: {
           githubUrl: 'https://github.com/manojkumar69work-bit/truthvortex',
-          liveUrl: 'https://truthvortex-sigma.vercel.app',
+          liveUrl: 'https://truthvortex.vercel.app',
         },
         modalData: {
           title: 'TruthVortex',
@@ -175,7 +175,7 @@ export const workTabs = [
         img: '/work/truthvortex.svg',
         url: {
           githubUrl: 'https://github.com/manojkumar69work-bit/truthvortex',
-          liveUrl: 'https://truthvortex-sigma.vercel.app',
+          liveUrl: 'https://truthvortex.vercel.app',
         },
         modalData: {
           title: 'TruthVortex',
