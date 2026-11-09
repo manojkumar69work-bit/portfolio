@@ -10,7 +10,7 @@ Third-year CSE student interning on his college's production ERP, where he owns 
 attendance and HR/leave domain across a 17-portal system used daily by the whole campus.
 Outside it he ships and deploys full-stack products end to end — FastAPI + PostgreSQL
 backends, Next.js frontends, and LLM/speech pipelines running live on Render, Vercel and
-Railway. Comfortable reverse-engineering an undocumented API, wiring payments, and
+Railway. Comfortable building multi-provider LLM fallback chains, scheduled scrapers, and
 operating a service inside free-tier memory and connection limits.
 
 ## Experience
@@ -27,22 +27,17 @@ Stack: Next.js 16, TypeScript, PostgreSQL (Supabase → AWS RDS), Shadcn UI.
 
 ## Projects
 
-- BunkMax — https://bunk-max.vercel.app — Attendance tracker with automated college-ERP
-  sync. Subscription SaaS telling students exactly how many classes they can miss.
-  Reverse-engineered the ERP's undocumented API, Fernet-encrypted credential storage for
-  daily re-sync, Razorpay orders and signature-verified webhooks, 30+ REST endpoints and
-  push-notification cron jobs. Code: https://github.com/manojkumar69work-bit/BunkMax
+- Red4ce — https://red4ce.com — A Telugu news website: breaking news, business,
+  sports, movies, crime and education, updated every 30 minutes.
 
-- TruthVortex — https://truthvortex.vercel.app — AI Telugu news aggregator scraping
-  ~30 RSS sources across 5 categories into 5–8 line Telugu summaries. Multi-provider AI
-  pipeline (OpenRouter primary, Groq fallback), background scraper with fuzzy
-  deduplication, per-IP rate limiting and CSP headers.
-  Code: https://github.com/manojkumar69work-bit/truthvortex
+- APEX Automotive — https://apex-automotive-lilac.vercel.app — Cinematic 3D scroll
+  experience for a concept supercar, built with a teammate. Rebuilt the Three.js scene:
+  car rig, procedural environments, a shared scroll timeline, an exploded view, an X-ray
+  scan and a wheel teardown.
 
 - Multi-lingual Voice Agent — Speech pipeline with sentence-level TTS streaming, barge-in
   via Silero VAD, and a Hindi language hint on ASR so code-switching does not break it.
   Every call produces a summary, a structured lead and a transcript.
-  Code: https://github.com/manojkumar69work-bit/Multi-lingual-Voice-Agents
 
 ## Stack
 
