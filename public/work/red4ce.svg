@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="400" viewBox="0 0 800 400">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#0b1a33"/>
+      <stop offset="1" stop-color="#050b1a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="0.5" cy="0.5" r="0.5">
+      <stop offset="0" stop-color="#dc2626" stop-opacity="0.45"/>
+      <stop offset="1" stop-color="#dc2626" stop-opacity="0"/>
+    </radialGradient>
+    <clipPath id="ticker"><rect x="0" y="352" width="800" height="48"/></clipPath>
+    <style>
+      .dot { animation: pulse 1.4s ease-in-out infinite; }
+      .tape { animation: scroll 18s linear infinite; }
+      @keyframes pulse { 0%, 100% { opacity: 1 } 50% { opacity: 0.25 } }
+      @keyframes scroll { from { transform: translateX(0) } to { transform: translateX(-700px) } }
+      @media (prefers-reduced-motion: reduce) { .dot, .tape { animation: none } }
+    </style>
+  </defs>
+  <rect width="800" height="400" fill="url(#bg)"/>
+  <circle cx="400" cy="150" r="230" fill="url(#glow)"/>
+
+  <!-- screen frame -->
+  <rect x="36" y="30" width="728" height="304" rx="14" fill="#071225" stroke="#1e293b" stroke-width="3"/>
+
+  <!-- live badge -->
+  <rect x="62" y="54" width="86" height="30" rx="6" fill="#dc2626"/>
+  <circle class="dot" cx="80" cy="69" r="5" fill="#fff"/>
+  <text x="92" y="75" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="15" font-weight="700" fill="#fff" letter-spacing="1.5">LIVE</text>
+
+  <!-- wordmark -->
+  <text x="400" y="168" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="96" font-weight="900" fill="#ffffff" text-anchor="middle" letter-spacing="-2">Red<tspan fill="#dc2626">4</tspan>ce</text>
+  <text x="400" y="212" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="20" fill="#94a3b8" text-anchor="middle">Telugu news · updated every 30 minutes</text>
+
+  <!-- category chips -->
+  <g font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="14" font-weight="600" text-anchor="middle">
+    <rect x="133" y="250" width="92" height="30" rx="15" fill="#dc2626"/><text x="179" y="270" fill="#fff">Breaking</text>
+    <rect x="235" y="250" width="92" height="30" rx="15" fill="#0f1d36" stroke="#1e293b"/><text x="281" y="270" fill="#cbd5e1">Business</text>
+    <rect x="337" y="250" width="72" height="30" rx="15" fill="#0f1d36" stroke="#1e293b"/><text x="373" y="270" fill="#cbd5e1">Sports</text>
+    <rect x="419" y="250" width="76" height="30" rx="15" fill="#0f1d36" stroke="#1e293b"/><text x="457" y="270" fill="#cbd5e1">Movies</text>
+    <rect x="505" y="250" width="66" height="30" rx="15" fill="#0f1d36" stroke="#1e293b"/><text x="538" y="270" fill="#cbd5e1">Crime</text>
+    <rect x="581" y="250" width="92" height="30" rx="15" fill="#0f1d36" stroke="#1e293b"/><text x="627" y="270" fill="#cbd5e1">Education</text>
+  </g>
+
+  <!-- ticker -->
+  <rect x="0" y="352" width="800" height="48" fill="#dc2626"/>
+  <rect x="0" y="352" width="132" height="48" fill="#991b1b"/>
+  <text x="66" y="382" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="15" font-weight="800" fill="#fff" text-anchor="middle" letter-spacing="1">తాజా వార్తలు</text>
+  <g clip-path="url(#ticker)">
+    <g class="tape" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="16" font-weight="600" fill="#fff">
+      <text x="150" y="382">Breaking · Business · Sports · Movies · Crime · Education · తెలుగు వార్తలు ·</text>
+      <text x="850" y="382">Breaking · Business · Sports · Movies · Crime · Education · తెలుగు వార్తలు ·</text>
+    </g>
+  </g>
+  <rect x="0" y="352" width="132" height="48" fill="#991b1b"/>
+  <text x="66" y="382" font-family="DM Sans, Helvetica, Arial, sans-serif" font-size="15" font-weight="800" fill="#fff" text-anchor="middle" letter-spacing="1">తాజా వార్తలు</text>
+</svg>
