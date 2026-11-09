@@ -56,55 +56,65 @@ export const SKILL_GROUPS = [
   },
 ]
 
+/* Parked for now — not rendered anywhere. Add it back to a tab in `workTabs`
+   below to put it on the site again. */
+export const BUNKMAX = {
+  title: 'BunkMax',
+  img: '/work/bunkmax.svg',
+  url: {
+    githubUrl: 'https://github.com/manojkumar69work-bit/BunkMax',
+    liveUrl: 'https://bunk-max.vercel.app',
+  },
+  modalData: {
+    title: 'BunkMax',
+    desc: 'Attendance tracker with automated college-ERP sync. Subscription SaaS that tells students exactly how many classes they can miss — replacing manual attendance math for the whole campus.',
+    infoHeading: 'Key Highlights',
+    infoArr: [
+      'Reverse-engineered the college ERP’s undocumented API by decoding its shipped JS bundles — base64 payloads, nested session cookie, Origin/Referer guards',
+      'Migrated the sync to the replacement portal (CampusHub) behind an unchanged client interface — one login imports attendance and the weekly timetable',
+      'Fernet-encrypted ERP credentials for daily automated re-sync; Razorpay orders, checkout and signature-verified webhooks',
+      '30+ REST endpoints plus morning/evening push-notification cron jobs',
+      'Tuned for Render’s free tier — single uvicorn worker, capped DB pool, /health keep-warm ping',
+    ],
+  },
+}
+
+const RED4CE_URL = {
+  liveUrl: 'https://red4ce.com',
+}
+
+const RED4CE_MODAL = {
+  title: 'Red4ce',
+  desc: 'A Telugu news website. Breaking news, business, sports, movies, crime and education — short, easy-to-read Telugu stories, updated through the day.',
+  infoHeading: 'On the site',
+  infoArr: [
+    'Six sections: Breaking, Business, Sports, Movies, Crime and Education',
+    'Short Telugu stories you can read at a glance, on a TV-style front page',
+    'Fresh news every 30 minutes',
+    'Red4ce’s own original reporting alongside news from other Telugu publishers, always credited',
+  ],
+}
+
+const APEX_URL = {
+  liveUrl: 'https://apex-automotive-lilac.vercel.app',
+}
+
+const VOICE_AGENT_URL = {}
+
 export const workTabs = [
   {
     name: 'Projects',
     items: [
       {
-        title: 'BunkMax',
-        img: '/work/bunkmax.svg',
-        url: {
-          githubUrl: 'https://github.com/manojkumar69work-bit/BunkMax',
-          liveUrl: 'https://bunk-max.vercel.app',
-        },
-        modalData: {
-          title: 'BunkMax',
-          desc: 'Attendance tracker with automated college-ERP sync. Subscription SaaS that tells students exactly how many classes they can miss — replacing manual attendance math for the whole campus.',
-          infoHeading: 'Key Highlights',
-          infoArr: [
-            'Reverse-engineered the college ERP’s undocumented API by decoding its shipped JS bundles — base64 payloads, nested session cookie, Origin/Referer guards',
-            'Migrated the sync to the replacement portal (CampusHub) behind an unchanged client interface — one login imports attendance and the weekly timetable',
-            'Fernet-encrypted ERP credentials for daily automated re-sync; Razorpay orders, checkout and signature-verified webhooks',
-            '30+ REST endpoints plus morning/evening push-notification cron jobs',
-            'Tuned for Render’s free tier — single uvicorn worker, capped DB pool, /health keep-warm ping',
-          ],
-        },
-      },
-      {
-        title: 'TruthVortex',
-        img: '/work/truthvortex.svg',
-        url: {
-          githubUrl: 'https://github.com/manojkumar69work-bit/truthvortex',
-          liveUrl: 'https://truthvortex.vercel.app',
-        },
-        modalData: {
-          title: 'TruthVortex',
-          desc: 'AI Telugu news aggregator. TV-style news dashboard that scrapes ~30 RSS sources across 5 categories and summarizes each article into 5–8 line Telugu summaries.',
-          infoHeading: 'Key Highlights',
-          infoArr: [
-            'Multi-provider AI pipeline (OpenRouter primary, Groq fallback) so a single provider outage or rate limit can’t stall the feed',
-            'Background scraper thread every 30 min with fuzzy deduplication and category normalization',
-            'Automatic deletion of articles older than 2 days to stay inside free-tier storage',
-            'Hardened for production — fixed a DB connection-pool race condition, per-IP rate limiting (slowapi), CSP headers, image proxy fallback, React error boundary',
-          ],
-        },
+        title: 'Red4ce',
+        img: '/work/red4ce.svg',
+        url: RED4CE_URL,
+        modalData: RED4CE_MODAL,
       },
       {
         title: 'Multi-lingual Voice Agent',
         img: '/work/voiceagent.svg',
-        url: {
-          githubUrl: 'https://github.com/manojkumar69work-bit/Multi-lingual-Voice-Agents',
-        },
+        url: VOICE_AGENT_URL,
         modalData: {
           title: 'Multi-lingual Voice Agent',
           desc: 'Real-time AI phone agent for real-estate lead capture that speaks Hinglish and understands mixed Hindi/English speech, built as a multi-tenant product.',
@@ -118,83 +128,43 @@ export const workTabs = [
           ],
         },
       },
+      {
+        title: 'APEX Automotive',
+        img: '/work/apex.jpg',
+        url: APEX_URL,
+        modalData: {
+          title: 'APEX Automotive',
+          desc: 'Cinematic 3D scroll experience for a concept supercar, built with a teammate. One pinned scroll drives the camera, the car and its environments through a nine-shot story.',
+          infoHeading: 'Key Highlights',
+          infoArr: [
+            'Rebuilt the 3D cinematic scene — car rig, procedural environments and a shared scroll timeline that the DOM panels, camera and car all read from',
+            'Exploded view — bumper, hood, doors, roof and rear clamshell lift off the carbon cell in sequence, then reassemble',
+            'X-ray pass — bodywork fades to glass while a scan sweeps nose to tail and lights up the structure, powertrain and brakes',
+            'Wheel assembly — the front corner comes toward the camera and the rim slides off to show disc, caliper and wishbones',
+            'Playwright scripts for shot capture, cinematic QA and performance checks',
+          ],
+        },
+      },
     ],
   },
   {
     name: 'Live',
     items: [
       {
-        title: 'BunkMax',
-        img: '/work/bunkmax.svg',
-        url: {
-          githubUrl: 'https://github.com/manojkumar69work-bit/BunkMax',
-          liveUrl: 'https://bunk-max.vercel.app',
-        },
-        modalData: {
-          title: 'BunkMax',
-          desc: 'Attendance tracker with automated college-ERP sync. Subscription SaaS that tells students exactly how many classes they can miss.',
-          infoHeading: 'Stack',
-          infoArr: ['Python', 'FastAPI', 'PostgreSQL (Supabase)', 'Next.js 16', 'NextAuth', 'Firebase', 'Razorpay'],
-        },
+        title: 'Red4ce',
+        img: '/work/red4ce.svg',
+        url: RED4CE_URL,
+        modalData: RED4CE_MODAL,
       },
       {
-        title: 'TruthVortex',
-        img: '/work/truthvortex.svg',
-        url: {
-          githubUrl: 'https://github.com/manojkumar69work-bit/truthvortex',
-          liveUrl: 'https://truthvortex.vercel.app',
-        },
+        title: 'APEX Automotive',
+        img: '/work/apex.jpg',
+        url: APEX_URL,
         modalData: {
-          title: 'TruthVortex',
-          desc: 'AI Telugu news aggregator — ~30 RSS sources summarized into 5–8 line Telugu summaries by a multi-provider LLM fallback chain.',
+          title: 'APEX Automotive',
+          desc: 'Cinematic 3D scroll experience for a concept supercar — exploded view, X-ray scan and wheel teardown, all driven by one scroll timeline.',
           infoHeading: 'Stack',
-          infoArr: ['FastAPI', 'PostgreSQL', 'Next.js 15', 'React 19', 'Tailwind v4', 'OpenRouter', 'Groq'],
-        },
-      },
-    ],
-  },
-  {
-    name: 'Open Source',
-    items: [
-      {
-        title: 'BunkMax',
-        img: '/work/bunkmax.svg',
-        url: {
-          githubUrl: 'https://github.com/manojkumar69work-bit/BunkMax',
-          liveUrl: 'https://bunk-max.vercel.app',
-        },
-        modalData: {
-          title: 'BunkMax',
-          desc: 'Attendance tracker with automated college-ERP sync.',
-          infoHeading: 'Stack',
-          infoArr: ['Python', 'FastAPI', 'PostgreSQL (Supabase)', 'Next.js 16', 'NextAuth', 'Firebase', 'Razorpay'],
-        },
-      },
-      {
-        title: 'TruthVortex',
-        img: '/work/truthvortex.svg',
-        url: {
-          githubUrl: 'https://github.com/manojkumar69work-bit/truthvortex',
-          liveUrl: 'https://truthvortex.vercel.app',
-        },
-        modalData: {
-          title: 'TruthVortex',
-          desc: 'AI Telugu news aggregator.',
-          infoHeading: 'Stack',
-          infoArr: ['FastAPI', 'PostgreSQL', 'Next.js 15', 'React 19', 'Tailwind v4'],
-        },
-      },
-      {
-        title: 'Multi-lingual Voice Agent',
-        img: '/work/voiceagent.svg',
-        url: {
-          githubUrl: 'https://github.com/manojkumar69work-bit/Multi-lingual-Voice-Agents',
-        },
-        modalData: {
-          title: 'Multi-lingual Voice Agent',
-          desc: 'Multi-tenant real-time AI phone agent — Telugu and mixed Hindi/English, with mid-call lead extraction.',
-          infoHeading: 'Stack',
-          infoArr: ['Python', 'FastAPI', 'WebRTC / LiveKit', 'Groq', 'Sarvam AI', 'edge-tts', 'Docker'],
+          infoArr: ['React 19', 'Three.js', 'React Three Fiber', 'drei', 'GSAP', 'Motion', 'Vite', 'Playwright'],
         },
       },
     ],
@@ -221,10 +191,10 @@ export const WORK_EXPERIENCE = [
 ]
 
 export const STATS = [
-  { value: '3+', label: 'Live Products', icon: 'rocket' },
-  { value: '30+', label: 'REST Endpoints', icon: 'server' },
-  { value: '103+', label: 'Commits on BunkMax', icon: 'git' },
-  { value: '4', label: 'AI Fallback Providers', icon: 'sparkles' },
+  { value: '17', label: 'Portals in a Live ERP', icon: 'rocket' },
+  { value: '6', label: 'News Sections on Red4ce', icon: 'server' },
+  { value: '115', label: 'Commits on Campus ERP', icon: 'git' },
+  { value: '2', label: 'Live Products', icon: 'sparkles' },
 ]
 
 export const HERO_WORDS = ['Fullstack', 'App', 'Web', 'AI']
@@ -232,7 +202,7 @@ export const HERO_WORDS = ['Fullstack', 'App', 'Web', 'AI']
 export const BOTTOM_TEXTS = [
   `Manoj currently interns on his college's <span class="black"> production ERP </span> system (Campus Companion).`,
   `He ships and deploys on <span class="black"> free tiers </span> — Render, Vercel and Railway — with real users.`,
-  `He reverse-engineered his college portal's <span class="black"> undocumented API </span> for BunkMax.`,
+  `He built <span class="black"> Red4ce </span>, a Telugu news website.`,
   `Interests: <span class="black"> Backend Engineering, AI Products, and Shipping. </span>`,
 ]
 
@@ -243,14 +213,14 @@ export const SCROLLER_PANELS = [
   {
     kicker: '01 — Backend',
     title: 'FastAPI, then Postgres.',
-    body: 'Every product starts as a schema and a set of endpoints. 30+ routes on BunkMax alone, tuned to survive a single free-tier uvicorn worker.',
+    body: 'Every product starts as a schema and a set of endpoints, built to survive a single free-tier instance.',
     tags: ['FastAPI', 'PostgreSQL', 'SQLAlchemy', 'Alembic'],
     scene: 'stack',
   },
   {
     kicker: '02 — AI',
     title: 'Never one provider.',
-    body: 'LLM and speech pipelines are built with fallback chains — OpenRouter to Groq, Sarvam to edge-tts — so one outage never stalls the product.',
+    body: 'LLM and speech pipelines are built with fallback chains — OpenRouter to Groq, Sarvam to edge-tts — so one outage never drops a call.',
     tags: ['OpenRouter', 'Groq', 'Sarvam AI', 'Silero VAD'],
     scene: 'orbit',
   },
@@ -264,8 +234,8 @@ export const SCROLLER_PANELS = [
   {
     kicker: '04 — Ship',
     title: 'Live, or it did not happen.',
-    body: 'Render, Vercel and Railway. Real users, real cron jobs, real payment webhooks — running on the free tier and staying up.',
-    tags: ['Render', 'Vercel', 'Railway', 'Razorpay'],
+    body: 'Render, Vercel and Railway. Real users and real cron jobs — running on the free tier and staying up.',
+    tags: ['Render', 'Vercel', 'Railway', 'GitHub Actions'],
     scene: 'ship',
   },
 ]
