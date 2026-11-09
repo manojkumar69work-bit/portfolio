@@ -52,7 +52,7 @@ const FILES = {
     '',
     'A portfolio that is also a small desktop. Try:',
     `  ${ORANGE}projects${R}   list what I have shipped`,
-    `  ${ORANGE}open bunkmax${R}  launch a project window`,
+    `  ${ORANGE}open red4ce${R}   launch a project window`,
     `  ${ORANGE}gesture${R}    control this page with your hand`,
     `  ${ORANGE}ai <q>${R}      ask me something`,
   ],
@@ -101,7 +101,7 @@ export const COMMANDS = {
         ...[...seen.values()].flatMap((p, i) => [
           `  ${ORANGE}${String(i + 1).padStart(2, '0')}${R} ${B}${p.title}${R}`,
           `     ${GREY}${p.modalData.desc.split('.')[0]}.${R}`,
-          `     ${CYAN}${p.url.liveUrl ?? p.url.githubUrl}${R}`,
+          ...(p.url.liveUrl ? [`     ${CYAN}${p.url.liveUrl}${R}`] : []),
           '',
         ]),
         `${D}  Tip: ${R}${ORANGE}open ${strip(`${[...seen.keys()][0]}`).toLowerCase()}${R}${D} opens it in a window.${R}`,
@@ -320,7 +320,7 @@ export const COMMANDS = {
     description: 'Ask about my work — answers from a local index',
     run: async (ctx, args) => {
       const q = args.join(' ').trim()
-      if (!q) return ['', `${GREY}Ask me something: ${ORANGE}ai what did you build for BunkMax?${R}`, '']
+      if (!q) return ['', `${GREY}Ask me something: ${ORANGE}ai what did you build for Red4ce?${R}`, '']
       ctx.setBusy(true)
       try {
         const lines = await aiAnswer(q)
