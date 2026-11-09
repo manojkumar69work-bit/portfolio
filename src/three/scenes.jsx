@@ -1,6 +1,7 @@
 import { useFrame } from '@react-three/fiber'
 import { useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
+import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js'
 
 const ORANGE = '#f0732d'
 
@@ -208,11 +209,38 @@ export function GridScene({ t, dark }) {
 
 /* ---------- Scene 4: the shipping robot ---------- */
 
+const smooth = (v) => v * v * (3 - 2 * v)
+
+function shadowTexture() {
+  const canvas = document.createElement('canvas')
+  canvas.width = canvas.height = 128
+  const ctx = canvas.getContext('2d')
+  const g = ctx.createRadialGradient(64, 64, 0, 64, 64, 64)
+  g.addColorStop(0, 'rgba(0,0,0,0.55)')
+  g.addColorStop(1, 'rgba(0,0,0,0)')
+  ctx.fillStyle = g
+  ctx.fillRect(0, 0, 128, 128)
+  return new THREE.CanvasTexture(canvas)
+}
+
+const EQ_BARS = 7
+
+/* A hovering assistant: it tracks the cursor with its body, head and eyes,
+   blinks, talks on its chest screen and waves harder the further the
+   panel has scrolled in. */
 export function RobotScene({ t, dark }) {
-  const group = useRef(null)
+  const root = useRef(null)
+  const bot = useRef(null)
   const head = useRef(null)
-  const arm = useRef(null)
+  const eyes = useRef(null)
   const antenna = useRef(null)
+  const antennaTip = useRef(null)
+  const waveShoulder = useRef(null)
+  const waveElbow = useRef(null)
+  const idleShoulder = useRef(null)
+  const flame = useRef(null)
+  const shadow = useRef(null)
+  const eq = useRef([])
   const pointer = useRef({ x: 0, y: 0 })
 
   useEffect(() => {
@@ -226,76 +254,245 @@ export function RobotScene({ t, dark }) {
     return () => window.removeEventListener('pointermove', onMove)
   }, [])
 
+  const geo = useMemo(
+    () => ({
+      head: new RoundedBoxGeometry(1.42, 1.02, 1.06, 5, 0.26),
+      visor: new RoundedBoxGeometry(1.14, 0.58, 0.1, 4, 0.045),
+      screen: new RoundedBoxGeometry(0.78, 0.46, 0.08, 3, 0.035),
+    }),
+    []
+  )
+  const shadowMap = useMemo(shadowTexture, [])
+  useEffect(
+    () => () => {
+      Object.values(geo).forEach((g) => g.dispose())
+      shadowMap.dispose()
+    },
+    [geo, shadowMap]
+  )
+
+  const mat = useMemo(() => {
+    const shell = new THREE.MeshPhysicalMaterial({
+      color: dark ? '#3b3252' : '#fffaf5',
+      roughness: 0.32,
+      metalness: 0.05,
+      clearcoat: 0.8,
+      clearcoatRoughness: 0.22,
+    })
+    const trim = new THREE.MeshStandardMaterial({ color: dark ? '#5a4c74' : '#ece4dc', roughness: 0.45, metalness: 0.2 })
+    const joint = new THREE.MeshStandardMaterial({ color: dark ? '#1c1828' : '#3a3440', roughness: 0.35, metalness: 0.55 })
+    const glass = new THREE.MeshPhysicalMaterial({ color: '#0d0b14', roughness: 0.08, metalness: 0.3, clearcoat: 1 })
+    const glow = new THREE.MeshBasicMaterial({ color: ORANGE, toneMapped: false })
+    const soft = new THREE.MeshStandardMaterial({ color: ORANGE, emissive: ORANGE, emissiveIntensity: 1.6 })
+    const blush = new THREE.MeshBasicMaterial({ color: '#ff8fa3', transparent: true, opacity: dark ? 0.35 : 0.5 })
+    const fire = new THREE.MeshBasicMaterial({
+      color: '#ff9a4a',
+      transparent: true,
+      opacity: 0.6,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      toneMapped: false,
+    })
+    return { shell, trim, joint, glass, glow, soft, blush, fire }
+  }, [dark])
+  useEffect(() => () => Object.values(mat).forEach((m) => m.dispose()), [mat])
+
   useFrame((state) => {
     const time = state.clock.elapsedTime
-    if (group.current) {
-      group.current.position.y = -0.3 + Math.sin(time * 1.1) * 0.14
-      group.current.scale.setScalar(0.72 + t * 0.3)
+    const { x: px, y: py } = pointer.current
+    const wave = smooth(t)
+
+    if (root.current) root.current.scale.setScalar(0.72 + t * 0.3)
+
+    const hover = Math.sin(time * 1.6)
+    if (bot.current) {
+      bot.current.position.y = hover * 0.12
+      bot.current.rotation.y = lerp(bot.current.rotation.y, px * 0.35, 0.05)
+      bot.current.rotation.z = lerp(bot.current.rotation.z, -px * 0.06 + Math.sin(time * 0.8) * 0.03, 0.05)
+    }
+    if (shadow.current) {
+      const s = 1 - hover * 0.08
+      shadow.current.scale.set(1.9 * s, 0.42 * s, 1)
+      shadow.current.material.opacity = (dark ? 0.5 : 0.32) * (1.08 - hover * 0.12)
     }
     if (head.current) {
-      head.current.rotation.y = lerp(head.current.rotation.y, pointer.current.x * 0.6, 0.08)
-      head.current.rotation.x = lerp(head.current.rotation.x, -pointer.current.y * 0.35, 0.08)
+      head.current.rotation.y = lerp(head.current.rotation.y, px * 0.45, 0.08)
+      head.current.rotation.x = lerp(head.current.rotation.x, -py * 0.3, 0.08)
+      head.current.rotation.z = Math.sin(time * 1.3) * 0.04 + wave * Math.sin(time * 3) * 0.04
     }
-    if (arm.current) arm.current.rotation.z = -0.5 + Math.sin(time * 4) * 0.7 * t
-    if (antenna.current) antenna.current.scale.y = 1 + Math.sin(time * 6) * 0.18
+    if (eyes.current) {
+      eyes.current.position.x = lerp(eyes.current.position.x, px * 0.09, 0.15)
+      eyes.current.position.y = lerp(eyes.current.position.y, py * 0.05, 0.15)
+      // Quick double-blink every few seconds.
+      const c = time % 4.2
+      const closed = c < 0.12 || (c > 0.28 && c < 0.38)
+      eyes.current.scale.y = lerp(eyes.current.scale.y, closed ? 0.08 : 1, 0.5)
+    }
+    if (antenna.current) {
+      antenna.current.rotation.z = Math.sin(time * 3.2) * 0.12 - (bot.current?.rotation.y ?? 0) * 0.25
+      antenna.current.rotation.x = Math.cos(time * 2.4) * 0.08
+    }
+    if (antennaTip.current) antennaTip.current.material.emissiveIntensity = 1.2 + Math.sin(time * 5) * 0.8
+
+    if (waveShoulder.current) waveShoulder.current.rotation.z = lerp(0.28, 2.55, wave) + Math.sin(time * 1.4) * 0.05
+    if (waveElbow.current) waveElbow.current.rotation.z = wave * (0.35 + Math.sin(time * 7) * 0.55)
+    if (idleShoulder.current) idleShoulder.current.rotation.z = -0.28 - Math.sin(time * 1.6 + 1) * 0.07
+
+    for (let i = 0; i < EQ_BARS; i++) {
+      const bar = eq.current[i]
+      if (!bar) continue
+      const level = 0.25 + Math.abs(Math.sin(time * (5 + i * 0.9) + i * 1.7)) * 0.75 * (0.4 + 0.6 * wave)
+      bar.scale.y = level
+    }
+    if (flame.current) {
+      flame.current.scale.y = 0.85 + Math.sin(time * 24) * 0.08 + Math.sin(time * 9) * 0.1 - hover * 0.1
+      flame.current.scale.x = flame.current.scale.z = 0.95 + Math.sin(time * 18) * 0.05
+    }
   })
 
-  const body = dark ? '#2a2436' : '#f4f0ec'
-  const trim = dark ? '#4a3f60' : '#d9d2cc'
-
   return (
-    <group ref={group} position={[0, -0.3, 0]}>
-      {/* torso */}
-      <mesh position={[0, -0.35, 0]}>
-        <capsuleGeometry args={[0.78, 0.85, 6, 18]} />
-        <meshStandardMaterial color={body} roughness={0.5} metalness={0.2} />
+    <group ref={root} position={[0, 0.1, 0]}>
+      <pointLight position={[2.2, 2.6, 4]} intensity={dark ? 18 : 26} distance={14} />
+      <pointLight position={[-2.6, 1.2, -2]} intensity={10} distance={10} color={ORANGE} />
+
+      {/* soft floor shadow, stays put while the body hovers */}
+      <mesh ref={shadow} position={[0, -2.35, -0.4]}>
+        <planeGeometry args={[1, 1]} />
+        <meshBasicMaterial map={shadowMap} transparent depthWrite={false} />
       </mesh>
-      {/* chest light */}
-      <mesh position={[0, -0.2, 0.74]}>
-        <circleGeometry args={[0.22, 24]} />
-        <meshStandardMaterial color={ORANGE} emissive={ORANGE} emissiveIntensity={1.4} />
-      </mesh>
-      {/* head */}
-      <group ref={head} position={[0, 0.82, 0]}>
-        <mesh>
-          <boxGeometry args={[1.28, 0.98, 1.0]} />
-          <meshStandardMaterial color={body} roughness={0.42} metalness={0.25} />
+
+      <group ref={bot}>
+        {/* torso */}
+        <mesh position={[0, -0.45, 0]} scale={[1, 1.08, 0.86]} material={mat.shell}>
+          <sphereGeometry args={[0.85, 48, 32]} />
         </mesh>
-        <mesh position={[0, 0.02, 0.52]}>
-          <boxGeometry args={[0.96, 0.44, 0.06]} />
-          <meshStandardMaterial color="#14121c" roughness={0.2} metalness={0.6} />
+        <mesh position={[0, -0.58, 0]} rotation={[Math.PI / 2, 0, 0]} scale={[1, 0.86, 1]} material={mat.trim}>
+          <torusGeometry args={[0.85, 0.045, 12, 64]} />
         </mesh>
-        <mesh position={[-0.2, 0.02, 0.57]}>
-          <circleGeometry args={[0.1, 20]} />
-          <meshStandardMaterial color={ORANGE} emissive={ORANGE} emissiveIntensity={1.8} />
+
+        {/* chest screen with a talking equalizer */}
+        <group position={[0, -0.24, 0.68]} rotation={[-0.2, 0, 0]}>
+          <mesh geometry={geo.screen} material={mat.glass} />
+          {Array.from({ length: EQ_BARS }, (_, i) => (
+            <mesh
+              key={i}
+              ref={(node) => (eq.current[i] = node)}
+              position={[(i - (EQ_BARS - 1) / 2) * 0.09, 0, 0.045]}
+              material={mat.glow}
+            >
+              <planeGeometry args={[0.045, 0.3]} />
+            </mesh>
+          ))}
+        </group>
+
+        {/* thruster */}
+        <mesh position={[0, -1.38, 0]} material={mat.joint}>
+          <cylinderGeometry args={[0.24, 0.32, 0.16, 32]} />
         </mesh>
-        <mesh position={[0.2, 0.02, 0.57]}>
-          <circleGeometry args={[0.1, 20]} />
-          <meshStandardMaterial color={ORANGE} emissive={ORANGE} emissiveIntensity={1.8} />
+        <mesh position={[0, -1.47, 0]} rotation={[Math.PI / 2, 0, 0]} material={mat.glow}>
+          <torusGeometry args={[0.25, 0.03, 10, 40]} />
         </mesh>
-        <group ref={antenna} position={[0, 0.49, 0]}>
-          <mesh position={[0, 0.22, 0]}>
-            <cylinderGeometry args={[0.035, 0.035, 0.44, 8]} />
-            <meshStandardMaterial color={trim} />
-          </mesh>
-          <mesh position={[0, 0.5, 0]}>
-            <sphereGeometry args={[0.12, 16, 16]} />
-            <meshStandardMaterial color={ORANGE} emissive={ORANGE} emissiveIntensity={1.2} />
+        <group ref={flame} position={[0, -1.47, 0]}>
+          <mesh position={[0, -0.3, 0]} rotation={[Math.PI, 0, 0]} material={mat.fire}>
+            <coneGeometry args={[0.2, 0.6, 24, 1, true]} />
           </mesh>
         </group>
-      </group>
-      {/* waving arm */}
-      <group ref={arm} position={[0.86, -0.1, 0]}>
-        <mesh position={[0.28, 0.1, 0]} rotation={[0, 0, -0.5]}>
-          <capsuleGeometry args={[0.16, 0.62, 4, 12]} />
-          <meshStandardMaterial color={trim} roughness={0.5} />
+
+        {/* neck */}
+        <mesh position={[0, 0.47, 0]} material={mat.joint}>
+          <cylinderGeometry args={[0.17, 0.22, 0.24, 24]} />
         </mesh>
+
+        {/* head */}
+        <group ref={head} position={[0, 0.98, 0]}>
+          <mesh geometry={geo.head} material={mat.shell} />
+          <mesh geometry={geo.visor} position={[0, 0.04, 0.5]} material={mat.glass} />
+          <group ref={eyes} position={[0, 0.04, 0.56]}>
+            {[-0.24, 0.24].map((x) => (
+              <group key={x} position={[x, 0, 0]}>
+                <mesh scale={[0.8, 1, 1]} material={mat.glow}>
+                  <circleGeometry args={[0.12, 32]} />
+                </mesh>
+                <mesh position={[0.035, 0.045, 0.002]}>
+                  <circleGeometry args={[0.03, 16]} />
+                  <meshBasicMaterial color="#fff6ee" toneMapped={false} />
+                </mesh>
+              </group>
+            ))}
+          </group>
+          {[-0.42, 0.42].map((x) => (
+            <mesh key={x} position={[x, -0.33, 0.531]} scale={[1, 0.6, 1]} material={mat.blush}>
+              <circleGeometry args={[0.09, 24]} />
+            </mesh>
+          ))}
+          {/* ears */}
+          {[-1, 1].map((side) => (
+            <group key={side} position={[side * 0.73, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
+              <mesh material={mat.trim}>
+                <cylinderGeometry args={[0.2, 0.2, 0.1, 32]} />
+              </mesh>
+              <mesh position={[0, side * 0.055, 0]} material={mat.soft}>
+                <cylinderGeometry args={[0.1, 0.1, 0.02, 24]} />
+              </mesh>
+            </group>
+          ))}
+          {/* springy antenna */}
+          <group ref={antenna} position={[0, 0.5, 0]}>
+            <mesh position={[0, 0.06, 0]} material={mat.joint}>
+              <cylinderGeometry args={[0.09, 0.11, 0.08, 20]} />
+            </mesh>
+            <mesh position={[0, 0.25, 0]} material={mat.trim}>
+              <cylinderGeometry args={[0.025, 0.025, 0.36, 10]} />
+            </mesh>
+            <mesh ref={antennaTip} position={[0, 0.47, 0]}>
+              <sphereGeometry args={[0.1, 24, 24]} />
+              <meshStandardMaterial color={ORANGE} emissive={ORANGE} emissiveIntensity={1.6} />
+            </mesh>
+          </group>
+        </group>
+
+        {/* waving arm (viewer's right) */}
+        <group ref={waveShoulder} position={[0.86, -0.12, 0]}>
+          <mesh material={mat.joint}>
+            <sphereGeometry args={[0.17, 24, 24]} />
+          </mesh>
+          <mesh position={[0, -0.3, 0]} material={mat.trim}>
+            <capsuleGeometry args={[0.12, 0.34, 6, 16]} />
+          </mesh>
+          <group ref={waveElbow} position={[0, -0.56, 0]}>
+            <mesh material={mat.joint}>
+              <sphereGeometry args={[0.12, 20, 20]} />
+            </mesh>
+            <mesh position={[0, -0.24, 0]} material={mat.trim}>
+              <capsuleGeometry args={[0.11, 0.28, 6, 16]} />
+            </mesh>
+            <mesh position={[0, -0.5, 0]} material={mat.shell}>
+              <sphereGeometry args={[0.16, 24, 24]} />
+            </mesh>
+          </group>
+        </group>
+
+        {/* resting arm (viewer's left) */}
+        <group ref={idleShoulder} position={[-0.86, -0.12, 0]}>
+          <mesh material={mat.joint}>
+            <sphereGeometry args={[0.17, 24, 24]} />
+          </mesh>
+          <mesh position={[0, -0.3, 0]} material={mat.trim}>
+            <capsuleGeometry args={[0.12, 0.34, 6, 16]} />
+          </mesh>
+          <group position={[0, -0.56, 0]} rotation={[0, 0, 0.25]}>
+            <mesh material={mat.joint}>
+              <sphereGeometry args={[0.12, 20, 20]} />
+            </mesh>
+            <mesh position={[0, -0.24, 0]} material={mat.trim}>
+              <capsuleGeometry args={[0.11, 0.28, 6, 16]} />
+            </mesh>
+            <mesh position={[0, -0.5, 0]} material={mat.shell}>
+              <sphereGeometry args={[0.16, 24, 24]} />
+            </mesh>
+          </group>
+        </group>
       </group>
-      {/* still arm */}
-      <mesh position={[-1.02, -0.42, 0]} rotation={[0, 0, 0.25]}>
-        <capsuleGeometry args={[0.16, 0.62, 4, 12]} />
-        <meshStandardMaterial color={trim} roughness={0.5} />
-      </mesh>
     </group>
   )
 }
